@@ -2,88 +2,157 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [Header("Movimiento")]
-    public float movementSpeed;
+    [Header("Movimiento Horizontal")]
+    public float moveSpeed;
+    public Vector2 direction;
+
+    [Header("Movimiento Vertical")]
+    public float jumpSpeed = 5f;
+    public float jumpDelay = 0.25f;
+    private float jumpTimer;
+
+    [Header("Componentes")]
+    public Rigidbody2D rb;
+    public LayerMask groundLayer;
+
+    [Header("Fisicas")]
     public float maxSpeed;
-    public float jumpForce;
+    public float linearDrag = 4f;
+    public float gravity = 1f;
+    public float fallMultiplier = 5f;
 
-    private bool isGrounded;
-    public Transform feetPos;
-    public float checkRadius;
-    public LayerMask whatIsGround;
-    
-    private float jumpTimeCounter;
-    public float jumpTime;
-    private bool isJumping;
+    [Header("Colisiones")]
+    public bool onGround = false;
+    public float groundLenght = 0.6f;
+    public Vector3 colliderOffset;
 
-    public float jumpHigh;
-    public float jumpLow;
-
-
-
-
-    private Rigidbody2D rb;
-    
-    void Start()
+    private void Update()
     {
-        rb = GetComponent<Rigidbody2D>();
+        direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpTimer = Time.time + jumpDelay;
+        }
+
+        onGround = Physics2D.Raycast(transform.position + colliderOffset, Vector2.down, groundLenght, groundLayer) || Physics2D.Raycast(transform.position - colliderOffset, Vector2.down, groundLenght, groundLayer);
     }
 
     private void FixedUpdate()
     {
-        var movement = Input.GetAxisRaw("Horizontal");
-         if(movement != 0)
+        MoveCharacter(direction.x);
+        ModifyPhysics();
+        if(jumpTimer > Time.time && onGround)
         {
-            rb.AddForce(new Vector2(movementSpeed, 0) * movement * Time.deltaTime, ForceMode2D.Impulse);
+            Jump();
         }
-        else
-        {
-            rb.velocity = Vector2.zero * Time.deltaTime;
-        }
-
-
-
-
-        rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);    
     }
-    void Update()
+
+
+    void MoveCharacter(float horizontal)
     {
-        //Check if on ground.
-        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
+        rb.AddForce(Vector2.right * horizontal * moveSpeed);
 
-        //Basic jump with checks, resets timer.
-        if(isGrounded == true && Input.GetButtonDown("Jump"))
+        if(Mathf.Abs(rb.velocity.x) > maxSpeed)
         {
-            isJumping = true;
-            jumpTimeCounter = jumpTime;
-            rb.AddForce(new Vector2 (0, jumpForce));
+            rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);
         }
+    }
 
-        if (Input.GetButton("Jump") && isJumping == true)
-        {
-            if(jumpTimeCounter > 0)
+    void ModifyPhysics()
+    {
+        if (onGround){
+            bool changingDirections = (direction.x > 0 && rb.velocity.x < 0) || (direction.x < 0 && rb.velocity.x > 0);
+            if (Mathf.Abs(direction.x) < 0.4f || changingDirections)
             {
-                rb.AddForce(new Vector2(0, jumpForce));
-                jumpTimeCounter -= Time.deltaTime;
+                rb.drag = linearDrag;
             }
             else
             {
-                isJumping = false;
+                rb.drag = 0f;
+            }
+            rb.gravityScale = 0f;
+        }
+        else
+        {
+            rb.gravityScale = gravity;
+            rb.drag = linearDrag * 0.15f;
+            if (rb.velocity.y < 0)
+            {
+                rb.gravityScale = gravity * fallMultiplier;
+            }
+            else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+            {
+                rb.gravityScale = gravity * (fallMultiplier / 2);
             }
 
         }
-        if (Input.GetButtonUp("Jump"))
-        {
-            isJumping = false;
-            
-        }
+    }   
 
-        if(rb.velocity.y < 0)
-        {
-            rb.AddForce( new Vector2 (0, Physics2D.gravity.y * (jumpHigh - 1) * Time.deltaTime));
-        }else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
-        {
-            rb.AddForce(new Vector2(0, Physics2D.gravity.y * (jumpLow - 1) * Time.deltaTime));
-        }
+    void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+        jumpTimer = 0f;
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position + colliderOffset, transform.position + colliderOffset + Vector3.down * groundLenght);
+        Gizmos.DrawLine(transform.position - colliderOffset, transform.position - colliderOffset + Vector3.down * groundLenght);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
