@@ -47,8 +47,6 @@ public class Movement : MonoBehaviour
             Jump();
         }
     }
-
-
     void MoveCharacter(float horizontal)
     {
         rb.AddForce(Vector2.right * horizontal * moveSpeed);
@@ -58,7 +56,6 @@ public class Movement : MonoBehaviour
             rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);
         }
     }
-
     void ModifyPhysics()
     {
         if (onGround){
@@ -85,10 +82,8 @@ public class Movement : MonoBehaviour
             {
                 rb.gravityScale = gravity * (fallMultiplier / 2);
             }
-
         }
     }   
-
     void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, 0);
@@ -101,58 +96,4 @@ public class Movement : MonoBehaviour
         Gizmos.DrawLine(transform.position + colliderOffset, transform.position + colliderOffset + Vector3.down * groundLenght);
         Gizmos.DrawLine(transform.position - colliderOffset, transform.position - colliderOffset + Vector3.down * groundLenght);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
