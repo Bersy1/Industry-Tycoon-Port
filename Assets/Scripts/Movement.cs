@@ -11,6 +11,12 @@ public class Movement : MonoBehaviour
     public float jumpDelay = 0.25f;
     private float jumpTimer;
 
+    [Header("Dash")]
+    public bool hasDashed = false;
+    public float dash;
+    public float dashStrength;
+    private float dashTimer;
+
     [Header("Componentes")]
     public Rigidbody2D rb;
     public LayerMask groundLayer;
@@ -35,9 +41,19 @@ public class Movement : MonoBehaviour
             jumpTimer = Time.time + jumpDelay;
         }
 
-        onGround = Physics2D.Raycast(transform.position + colliderOffset, Vector2.down, groundLenght, groundLayer) || Physics2D.Raycast(transform.position - colliderOffset, Vector2.down, groundLenght, groundLayer);
-    }
+        if (Input.GetButtonDown("Fire3"))
+        {
+            dashTimer = Time.time + jumpDelay;
+        }
 
+
+        onGround = Physics2D.Raycast(transform.position + colliderOffset, Vector2.down, groundLenght, groundLayer) || Physics2D.Raycast(transform.position - colliderOffset, Vector2.down, groundLenght, groundLayer);
+
+        if (onGround)
+        {
+            hasDashed = false;
+        }
+    }
     private void FixedUpdate()
     {
         MoveCharacter(direction.x);
@@ -45,6 +61,17 @@ public class Movement : MonoBehaviour
         if(jumpTimer > Time.time && onGround)
         {
             Jump();
+        }
+
+        if (dashTimer > Time.time && onGround)
+        {
+            Dash(direction.x, direction.y);
+        }else if(dashTimer > Time.time && !onGround)
+        {
+            if(hasDashed == false)
+            {
+                Dash(direction.x, direction.y);
+            }
         }
     }
     void MoveCharacter(float horizontal)
@@ -89,6 +116,17 @@ public class Movement : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
         jumpTimer = 0f;
+    }
+
+    void Dash(float x, float y)
+    {
+        if(hasDashed == false)
+        {
+            rb.velocity = Vector2.zero;
+            rb.velocity += new Vector2(direction.x, direction.y) * dashStrength;
+            hasDashed = true;
+            dashTimer = 0f;
+        }
     }
     private void OnDrawGizmos()
     {
