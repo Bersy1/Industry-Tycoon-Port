@@ -88,12 +88,6 @@ public class Player : MonoBehaviour
     {
         if (onGround)
         {
-            if(onGround && Input.GetAxisRaw("Vertical") < 0f)
-            {
-
-            }
-            
-
             bool changingDirections = (direction.x > 0 && rb.velocity.x < 0) || (direction.x < 0 && rb.velocity.x > 0);
             if (Mathf.Abs(direction.x) < 0.4f || changingDirections)
             {
@@ -136,6 +130,18 @@ public class Player : MonoBehaviour
             dashTimer = 0f;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Collectable"))
+        {
+            print("We've collected the thing");
+        }
+        Destroy(collision.gameObject);
+    }
+
+
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
