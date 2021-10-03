@@ -1,18 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static GameManager instance;
+    public int woodCollected;
+    public TextMeshProUGUI woodText;
+    public int woodGoal = 3;
+    private void Awake()
     {
-        
+        instance = this;
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        woodText.text = "<sprite=4> " + woodCollected.ToString() + "/" + woodGoal;;
+    }
+    public void PlayGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    public void QuitGame()
+    {
+        Debug.Log("Quit");
+        Application.Quit();
     }
 }

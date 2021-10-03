@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.replicastudios.link": {
+      "version": "file:C:/Users/Bersy/Downloads/replica-unity-link-v0.0.1.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
+    },
     "com.unity.2d.animation": {
       "version": "5.0.7",
       "depth": 0,
