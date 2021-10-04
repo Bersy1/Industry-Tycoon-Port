@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     [Header("Componentes")]
     public Rigidbody2D rb;
     public LayerMask groundLayer;
+    public SpriteRenderer spriteRenderer;
 
     [Header("Fisicas")]
     public float maxSpeed;
@@ -31,6 +32,9 @@ public class Player : MonoBehaviour
     public bool onGround = false;
     public float groundLenght = 0.6f;
     public Vector3 colliderOffset;
+
+    [Header("Animaciones")]
+    public Animator animator;
 
     private void Update()
     {
@@ -53,6 +57,8 @@ public class Player : MonoBehaviour
         {
             hasDashed = false;
         }
+
+        Animations();
     }
     private void FixedUpdate()
     {
@@ -79,6 +85,7 @@ public class Player : MonoBehaviour
     {
         rb.AddForce(Vector2.right * horizontal * moveSpeed);
 
+
         if (Mathf.Abs(rb.velocity.x) > maxSpeed)
         {
             rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);
@@ -97,7 +104,7 @@ public class Player : MonoBehaviour
             {
                 rb.drag = 0f;
             }
-            rb.gravityScale = 0f;
+            rb.gravityScale = gravity;
         }
         else
         {
@@ -118,6 +125,7 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
         jumpTimer = 0f;
+        
     }
 
     void Dash(float x, float y)
@@ -131,6 +139,28 @@ public class Player : MonoBehaviour
         }
     }
 
+    void Animations()
+    {
+        animator.SetFloat("Speed", Mathf.Abs(direction.x));
+        animator.SetBool("OnGround", onGround);
+        if(onGround == true)
+        {
+            animator.SetFloat("Jump", 0);
+        }
+        else
+        {
+            animator.SetFloat("Jump", (rb.velocity.y));
+        }
+        
+        if (direction.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (direction.x > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
