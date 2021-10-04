@@ -182,8 +182,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Quit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7b85bbba1a98e3d48a8a78ae7c82b215, type: 2}
+  m_sharedMaterial: {fileID: -2486954321295226091, guid: 7b85bbba1a98e3d48a8a78ae7c82b215, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 135.85
+  m_fontSize: 165.7
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -286,8 +286,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126be44074c888144a91b79a8e955851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puntaje: 0
-  puntajeText: {fileID: 0}
+  woodCollected: 0
+  woodText: {fileID: 0}
+  woodGoal: 3
 --- !u!4 &415490936
 Transform:
   m_ObjectHideFlags: 0
@@ -361,8 +362,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: PLAY
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7b85bbba1a98e3d48a8a78ae7c82b215, type: 2}
+  m_sharedMaterial: {fileID: -2486954321295226091, guid: 7b85bbba1a98e3d48a8a78ae7c82b215, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
