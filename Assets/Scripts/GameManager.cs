@@ -14,9 +14,15 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
     }
-    private void Update()
+    private void FixedUpdate()
     {
-        woodText.text = "<sprite=4> " + woodCollected.ToString() + "/" + woodGoal;;
+        if (woodText != null)
+        {
+            woodText.text = "<sprite=4> " + woodCollected.ToString() + "/" + woodGoal; ;
+        }
+        else return;
+
+
     }
     public void PlayGame()
     {

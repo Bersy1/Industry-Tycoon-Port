@@ -127,7 +127,6 @@ public class Player : MonoBehaviour
         jumpTimer = 0f;
         
     }
-
     void Dash(float x, float y)
     {
         if (hasDashed == false)
@@ -138,12 +137,18 @@ public class Player : MonoBehaviour
             dashTimer = 0f;
         }
     }
-
     void Animations()
     {
         animator.SetFloat("Speed", Mathf.Abs(direction.x));
         animator.SetBool("OnGround", onGround);
-        if(onGround == true)
+        if(direction.y == -1)
+        {
+            animator.SetBool("IsCrouching", true);
+        }else
+        {
+            animator.SetBool("IsCrouching", false);
+        }
+        if (onGround == true)
         {
             animator.SetFloat("Jump", 0);
         }
@@ -151,7 +156,7 @@ public class Player : MonoBehaviour
         {
             animator.SetFloat("Jump", (rb.velocity.y));
         }
-        
+
         if (direction.x < 0)
         {
             spriteRenderer.flipX = true;
