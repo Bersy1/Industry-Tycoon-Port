@@ -45,3 +45,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Tree
+    uniqueID: 3903507907
+    locked: 0
+  - name: Wood
+    uniqueID: 489349159
+    locked: 0

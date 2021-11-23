@@ -21,9 +21,8 @@ public class GameManager : MonoBehaviour
             woodText.text = "<sprite=4> " + woodCollected.ToString() + "/" + woodGoal; ;
         }
         else return;
-
-
     }
+
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

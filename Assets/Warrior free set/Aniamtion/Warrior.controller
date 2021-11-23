@@ -102,7 +102,7 @@ AnimatorStateMachine:
     m_Position: {x: 480, y: 480, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3802118723531622627}
-    m_Position: {x: 420, y: 260, z: 0}
+    m_Position: {x: 280, y: 560, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4164821889480732602}
     m_Position: {x: 480, y: 680, z: 0}
@@ -114,7 +114,7 @@ AnimatorStateMachine:
     m_Position: {x: 270, y: -230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1871750871593261253}
-    m_Position: {x: 270, y: -170, z: 0}
+    m_Position: {x: 410, y: -160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5421050421449421495}
     m_Position: {x: 480, y: 520, z: 0}
@@ -129,7 +129,7 @@ AnimatorStateMachine:
     m_Position: {x: 330, y: 150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8768573223923571216}
-    m_Position: {x: 220, y: 260, z: 0}
+    m_Position: {x: 280, y: 520, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2059664036498852191}
     m_Position: {x: 480, y: 640, z: 0}
@@ -441,25 +441,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Jump
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: OnGround
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsCrouching
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
