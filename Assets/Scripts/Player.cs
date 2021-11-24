@@ -36,6 +36,9 @@ public class Player : MonoBehaviour
     [Header("Animaciones")]
     public Animator animator;
 
+    [Header("Audio")]
+    public AudioSource footSteps;
+
     private void Update()
     {
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -171,5 +174,9 @@ public class Player : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position + colliderOffset, transform.position + colliderOffset + Vector3.down * groundLenght);
         Gizmos.DrawLine(transform.position - colliderOffset, transform.position - colliderOffset + Vector3.down * groundLenght);
+    }
+    private void FootSteps()
+    {
+        footSteps.Play();
     }
 }
