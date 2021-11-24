@@ -54,10 +54,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Free Pixel Art Forest\Demo\MoveBackground.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Collectible.cs" />
     <Compile Include="Assets\Scripts\VerticalPlatform.cs" />
-    <Compile Include="Assets\Free Pixel Art Forest\Demo\MoveBackground.cs" />
+    <Compile Include="Assets\CreditsManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
